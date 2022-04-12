@@ -6,8 +6,10 @@ import com.example.ports.output.CompanyEntityMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +26,7 @@ public class CompanyController {
     }
 
     @PostMapping()
-    public ResponseEntity<CompanyDTO> save(@RequestBody CompanyDTO companyDTO) {
+    public ResponseEntity<CompanyDTO> save(@RequestBody @Valid CompanyDTO companyDTO) {
         Company company = this.companyCRUDinPort.save(CompanyRestMapper.of(companyDTO));
         return ResponseEntity.ok(CompanyRestMapper.of(company));
     }
